@@ -16,6 +16,11 @@
 		1A6A4BAF2C610C2500156DD4 /* Note_ATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A4BAE2C610C2500156DD4 /* Note_ATests.swift */; };
 		1A6A4BB92C610C2500156DD4 /* Note_AUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A4BB82C610C2500156DD4 /* Note_AUITests.swift */; };
 		1A6A4BBB2C610C2500156DD4 /* Note_AUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A4BBA2C610C2500156DD4 /* Note_AUITestsLaunchTests.swift */; };
+		1A6A4BC82C610D1A00156DD4 /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A4BC72C610D1A00156DD4 /* AddTaskView.swift */; };
+		1A6A4BCA2C610D3500156DD4 /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A4BC92C610D3500156DD4 /* TaskDetailView.swift */; };
+		1A6A4BD02C611ADA00156DD4 /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A4BCF2C611ADA00156DD4 /* TaskEditView.swift */; };
+		1A6A4BD22C611C8300156DD4 /* TaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A4BD12C611C8300156DD4 /* TaskStore.swift */; };
+		1A6A4BD42C6131DD00156DD4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6A4BD32C6131DD00156DD4 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +53,11 @@
 		1A6A4BB42C610C2500156DD4 /* Note-AUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Note-AUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A6A4BB82C610C2500156DD4 /* Note_AUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_AUITests.swift; sourceTree = "<group>"; };
 		1A6A4BBA2C610C2500156DD4 /* Note_AUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_AUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1A6A4BC72C610D1A00156DD4 /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
+		1A6A4BC92C610D3500156DD4 /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
+		1A6A4BCF2C611ADA00156DD4 /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
+		1A6A4BD12C611C8300156DD4 /* TaskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStore.swift; sourceTree = "<group>"; };
+		1A6A4BD32C6131DD00156DD4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +109,12 @@
 			isa = PBXGroup;
 			children = (
 				1A6A4B982C610C2200156DD4 /* Note_AApp.swift */,
+				1A6A4BD32C6131DD00156DD4 /* SettingsView.swift */,
 				1A6A4B9A2C610C2200156DD4 /* ContentView.swift */,
+				1A6A4BC72C610D1A00156DD4 /* AddTaskView.swift */,
+				1A6A4BC92C610D3500156DD4 /* TaskDetailView.swift */,
+				1A6A4BCF2C611ADA00156DD4 /* TaskEditView.swift */,
+				1A6A4BD12C611C8300156DD4 /* TaskStore.swift */,
 				1A6A4B9C2C610C2500156DD4 /* Assets.xcassets */,
 				1A6A4BA12C610C2500156DD4 /* Persistence.swift */,
 				1A6A4BA32C610C2500156DD4 /* Note_A.xcdatamodeld */,
@@ -264,6 +279,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A6A4BA22C610C2500156DD4 /* Persistence.swift in Sources */,
+				1A6A4BC82C610D1A00156DD4 /* AddTaskView.swift in Sources */,
+				1A6A4BD22C611C8300156DD4 /* TaskStore.swift in Sources */,
+				1A6A4BD42C6131DD00156DD4 /* SettingsView.swift in Sources */,
+				1A6A4BCA2C610D3500156DD4 /* TaskDetailView.swift in Sources */,
+				1A6A4BD02C611ADA00156DD4 /* TaskEditView.swift in Sources */,
 				1A6A4BA52C610C2500156DD4 /* Note_A.xcdatamodeld in Sources */,
 				1A6A4B9B2C610C2200156DD4 /* ContentView.swift in Sources */,
 				1A6A4B992C610C2200156DD4 /* Note_AApp.swift in Sources */,
