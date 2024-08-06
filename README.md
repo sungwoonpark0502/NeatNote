@@ -10,6 +10,12 @@
 - **Persistent Storage**: Integrated with CoreData for reliable data persistence. Tasks are saved securely, ensuring that your data is always available and consistent.
 - **User-Friendly Interface**: Designed with an intuitive interface that includes dynamic lists and navigation. The user experience is enhanced with real-time updates and easy-to-use filtering options.
 
+## Demonstration Video
+
+Check out the demonstration video of the NeatNote app:
+
+In Progress
+
 ## How It Works
 
 1. **Add Tasks**: Create new tasks with titles, descriptions, due dates, priorities, and categories.
