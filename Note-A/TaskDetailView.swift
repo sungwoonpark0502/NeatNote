@@ -33,24 +33,38 @@ struct TaskDetailView: View {
                 VStack(alignment: .leading, spacing: 15) {
                     Text(task.title ?? "No Title")
                         .font(.title)
-                    Text("\(task.dueDate ?? Date(), style: .date) \(task.dueDate ?? Date(), style: .time)")
-                        .font(.body)
-                    Text(task.taskDescription ?? "No Description")
-                        .font(.body)
+                        .padding(.bottom, 5)
+                    
                     HStack {
-                        PriorityIndicator(priority: task.priority ?? "Medium")
-                            .padding(.trailing, 5)
-                        Text("Priority: \(task.priority ?? "Medium")")
+                        Image(systemName: "calendar")
+                        Text("\(task.dueDate ?? Date(), style: .date) \(task.dueDate ?? Date(), style: .time)")
                             .font(.body)
+                            .foregroundColor(.gray)
                     }
-                    Text("Category: \(task.category ?? "Work")")
+                    
+                    Text(task.taskDescription?.isEmpty == false ? task.taskDescription! : "No Description")
                         .font(.body)
+                        .padding(.bottom, 5)
+                    
+                    HStack {
+                        Image(systemName: "exclamationmark.circle")
+                        Text(task.priority ?? "Medium")
+                            .font(.body)
+                            .foregroundColor(.gray)
+                    }
+                    
+                    HStack {
+                        Image(systemName: "tag")
+                        Text(task.category ?? "Work")
+                            .font(.body)
+                            .foregroundColor(.gray)
+                    }
                 }
-                .padding(.leading, 0) // Left padding
-                .padding(.top, 30) // Top padding
+                .padding(.leading, 16)
+                .padding(.top, 20)
             }
             
-            Spacer() // Pushes content to the top
+            Spacer()
         }
         .navigationBarTitle(isEditing ? "Edit Task" : "Task Details", displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
@@ -58,7 +72,7 @@ struct TaskDetailView: View {
         }) {
             Text(isEditing ? "" : "Edit")
         })
-        .padding(.top, 10) // Adjust top padding for overall view
+        .padding(.top, 10)
         .onAppear(perform: loadCategories)
     }
     
