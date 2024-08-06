@@ -48,10 +48,16 @@ struct TaskEditView: View {
                     .onChange(of: category) { _ in hasChanges = true }
                 }
                 
-                Button("Delete") {
-                    deleteTask()
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        deleteTask()
+                    }) {
+                        Text("Delete")
+                            .foregroundColor(.red)
+                    }
+                    Spacer()
                 }
-                .foregroundColor(.red)
             }
             
             Spacer()

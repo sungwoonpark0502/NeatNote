@@ -13,9 +13,10 @@ struct ContentView: View {
     @State private var showingAddTaskView = false
     @State private var searchText = ""
     @State private var selectedCategory: String = "All" // Default to "All"
-    @State private var showingDeleteConfirmation = false // For delete confirmation dialog
     @State private var showingDeleteAlert = false // For custom alert dialog
     @State private var showingSettingsView = false // For navigating to SettingsView
+    @State private var isSelecting = false // Toggle for selection mode
+    @State private var selectedTaskIDs = Set<NSManagedObjectID>() // Store selected task IDs
     
     private let categories: [String] = ["All", "Work", "School", "Exercise", "Personal", "Other"]
     
@@ -31,72 +32,119 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 // Search bar
-                TextField("Search", text: $searchText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding([.leading, .trailing, .top])
-                
-                // Category selection button
                 HStack {
+                    TextField("Search", text: $searchText)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding([.leading, .top])
+                    
                     Spacer()
-                    Menu {
-                        ForEach(categories, id: \.self) { category in
-                            Button(category) {
-                                selectedCategory = category
-                            }
+                }
+                
+                // Select and Category buttons
+                HStack {
+                    if isSelecting {
+                        Button(action: {
+                            isSelecting.toggle()
+                            selectedTaskIDs.removeAll() // Clear selection when exiting selection mode
+                        }) {
+                            Text("Cancel")
+                                .padding(5)
                         }
-                    } label: {
-                        Text("Category: \(selectedCategory)")
-                            .font(.subheadline) // Smaller font size
-                            .padding(5) // Small padding around text
+                        .padding(.leading)
+                    } else {
+                        Button(action: {
+                            isSelecting.toggle()
+                        }) {
+                            Text("Select")
+                                .padding(5)
+                        }
+                        .padding(.leading)
                     }
-                    .padding(.trailing) // Adjust right padding as needed
+                    
+                    Spacer()
+                    
+                    // Only show Category button if not in selection mode
+                    if !isSelecting {
+                        Menu {
+                            ForEach(categories, id: \.self) { category in
+                                Button(category) {
+                                    selectedCategory = category
+                                }
+                            }
+                        } label: {
+                            Text("Category: \(selectedCategory)")
+                                .font(.subheadline) // Smaller font size
+                                .padding(5) // Small padding around text
+                        }
+                        .padding(.trailing) // Adjust right padding as needed
+                    }
+                    
+                    // Show Delete Selected button only when selecting and tasks are selected
+                    if isSelecting && !selectedTaskIDs.isEmpty {
+                        Button(action: {
+                            deleteSelectedTasks() // Directly delete selected tasks
+                        }) {
+                            Text("Delete Selected")
+                                .foregroundColor(.red)
+                                .padding(5)
+                        }
+                        .padding(.trailing)
+                    }
                 }
                 .padding(.bottom, 5) // Reduce bottom padding
                 
-                List {
-                    ForEach(filteredTasks, id: \.self) { task in
-                        NavigationLink(destination: TaskDetailView(task: task)) {
-                            TaskRow(task: task)
+                if filteredTasks.isEmpty {
+                    Spacer()
+                    Text("No Tasks")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                    Spacer()
+                } else {
+                    List {
+                        ForEach(filteredTasks, id: \.objectID) { task in
+                            HStack {
+                                if isSelecting {
+                                    Button(action: {
+                                        let taskID = task.objectID
+                                        if selectedTaskIDs.contains(taskID) {
+                                            selectedTaskIDs.remove(taskID)
+                                        } else {
+                                            selectedTaskIDs.insert(taskID)
+                                        }
+                                    }) {
+                                        Image(systemName: selectedTaskIDs.contains(task.objectID) ? "checkmark.circle.fill" : "circle")
+                                    }
+                                    .buttonStyle(PlainButtonStyle()) // Prevent default button styling
+                                }
+                                
+                                NavigationLink(destination: TaskDetailView(task: task)) {
+                                    TaskRow(task: task)
+                                }
+                                .opacity(isSelecting ? 0.5 : 1) // Dim the row when selecting
+                                .disabled(isSelecting) // Disable interaction when selecting
+                            }
                         }
+                        .onDelete(perform: deleteTasks)
                     }
-                    .onDelete(perform: deleteTasks)
                 }
-                .navigationBarTitle(Text("Note-A").font(.system(size: 20)), displayMode: .inline)
-                .navigationBarItems(
-                    leading: Menu {
-                        Button(action: {
-                            showingDeleteAlert.toggle() // Show custom alert
-                        }) {
-                            Text("Delete All")
-                                .foregroundColor(.red) // Set color to red
-                        }
-                        
-                        Button(action: {
-                            showingSettingsView = true // Trigger navigation to SettingsView
-                        }) {
-                            Text("Settings")
-                        }
-                    } label: {
-                        Image(systemName: "ellipsis.circle") // Button with three dots
-                    }
-                    .confirmationDialog(
-                        "Are you sure you want to delete all tasks?",
-                        isPresented: $showingDeleteConfirmation,
-                        titleVisibility: .visible
-                    ) {
-                        Button("Delete All", role: .destructive) {
-                            deleteAllTasks()
-                        }
-                        Button("Cancel", role: .cancel) { }
-                    },
-                    trailing: Button(action: {
-                        showingAddTaskView.toggle()
+            }
+            .navigationBarTitle(Text("Note-A").font(.system(size: 20)), displayMode: .inline)
+            .navigationBarItems(
+                leading: Menu {
+                    Button(action: {
+                        showingDeleteAlert.toggle() // Show custom alert
                     }) {
-                        Image(systemName: "plus")
+                        Text("Delete All")
+                            .foregroundColor(.red) // Set color to red
                     }
-                )
-                .sheet(isPresented: $showingAddTaskView) {
-                    AddTaskView().environment(\.managedObjectContext, viewContext)
+                    
+                    Button(action: {
+                        showingSettingsView = true // Trigger navigation to SettingsView
+                    }) {
+                        Text("Settings")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle") // Button with three dots
                 }
                 .alert(isPresented: $showingDeleteAlert) {
                     Alert(
@@ -107,28 +155,36 @@ struct ContentView: View {
                         },
                         secondaryButton: .cancel()
                     )
+                },
+                trailing: Button(action: {
+                    showingAddTaskView.toggle()
+                }) {
+                    Image(systemName: "plus")
                 }
-                .background(
-                    NavigationLink(
-                        destination: SettingsView(),
-                        isActive: $showingSettingsView,
-                        label: { EmptyView() }
-                    )
-                )
-                
-                // Version text at the bottom
-                Text("Version 1.0")
-                    .font(.footnote) // Small font size
-                    .foregroundColor(.gray) // Optional: Set text color to gray
-                    .padding(.bottom, 10) // Space from the bottom
-                    .frame(maxWidth: .infinity, alignment: .center) // Centered text
+            )
+            .sheet(isPresented: $showingAddTaskView) {
+                AddTaskView().environment(\.managedObjectContext, viewContext)
             }
+            .background(
+                NavigationLink(
+                    destination: SettingsView(),
+                    isActive: $showingSettingsView,
+                    label: { EmptyView() }
+                )
+            )
+            
+            // Version text at the bottom
+            Text("Version 1.0")
+                .font(.footnote) // Small font size
+                .foregroundColor(.gray) // Optional: Set text color to gray
+                .padding(.bottom, 10) // Space from the bottom
+                .frame(maxWidth: .infinity, alignment: .center) // Centered text
         }
     }
     
     private func deleteTasks(offsets: IndexSet) {
         withAnimation {
-            offsets.map { tasks[$0] }.forEach(viewContext.delete)
+            offsets.map { filteredTasks[$0] }.forEach(viewContext.delete)
             do {
                 try viewContext.save()
             } catch {
@@ -143,6 +199,24 @@ struct ContentView: View {
             tasks.forEach(viewContext.delete)
             do {
                 try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+    
+    private func deleteSelectedTasks() {
+        withAnimation {
+            selectedTaskIDs.forEach { taskID in
+                if let task = viewContext.object(with: taskID) as? TaskEntity {
+                    viewContext.delete(task)
+                }
+            }
+            do {
+                try viewContext.save()
+                selectedTaskIDs.removeAll()
+                isSelecting = false // Exit selection mode after deletion
             } catch {
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
