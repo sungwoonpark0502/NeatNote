@@ -40,6 +40,20 @@ struct SettingsView: View {
                 .padding([.leading, .trailing])
 
             Spacer()
+            
+            // Version text at the bottom
+            Text("Version 1.0")
+                .font(.footnote) // Small font size
+                .foregroundColor(.gray) // Optional: Set text color to gray
+                .padding(.bottom, 5) // Space from the bottom
+                .frame(maxWidth: .infinity, alignment: .center) // Centered text
+            
+            // Designer text
+            Text("Designed by Sungwoon Park")
+                .font(.footnote) // Small font size
+                .foregroundColor(.gray) // Optional: Set text color to gray
+                .padding(.bottom, 10) // Space from the bottom
+                .frame(maxWidth: .infinity, alignment: .center) // Centered text
         }
         .navigationTitle("Settings")
         .padding()

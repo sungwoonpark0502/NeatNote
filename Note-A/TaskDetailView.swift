@@ -46,6 +46,7 @@ struct TaskDetailView: View {
                     Text("Category: \(task.category ?? "Work")")
                         .font(.body)
                 }
+                .padding(.leading, 0) // Left padding
                 .padding(.top, 30) // Top padding
             }
             
@@ -56,7 +57,6 @@ struct TaskDetailView: View {
             isEditing.toggle()
         }) {
             Text(isEditing ? "" : "Edit")
-                .opacity(isEditing ? 0 : 1) // Hide "Edit" text when editing
         })
         .padding(.top, 10) // Adjust top padding for overall view
         .onAppear(perform: loadCategories)
