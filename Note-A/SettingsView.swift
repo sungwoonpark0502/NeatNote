@@ -34,7 +34,7 @@ struct SettingsView: View {
                 .padding()
 
             // Explanation Text for Notifications
-            Text("Enable notifications 1 day and 1 hour before the due date and time.")
+            Text("Enable notifications 1 day and 1 hour before the due date and time. (Currently Not Working)")
                 .font(.subheadline)
                 .foregroundColor(.gray)
                 .padding([.leading, .trailing])

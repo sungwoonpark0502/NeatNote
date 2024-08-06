@@ -128,7 +128,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationBarTitle(Text("Taskify").font(.system(size: 20)), displayMode: .inline)
+            .navigationBarTitle(Text("NeatNote").font(.system(size: 20)), displayMode: .inline)
             .navigationBarItems(
                 leading: Menu {
                     Button(action: {
