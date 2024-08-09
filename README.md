@@ -18,7 +18,7 @@
 Check out the demonstration video of the NeatNote app:
 
 <p align="center">
-<img src="https://github.com/sungwoonpark0502/NeatNote/blob/10a6590c5b0ffe91b5dcda0b8432d3545bebc6c6/NeatNote%20Demonstration.gif" width="300" height="500">
+[Watch the video](URL_of_the_mov_file)
 </p>
 
 ## How It Works
