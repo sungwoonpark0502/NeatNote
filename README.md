@@ -10,7 +10,7 @@
 - **Persistent Storage**: Integrated with CoreData for reliable data persistence. Tasks are saved securely, ensuring that your data is always available and consistent.
 - **User-Friendly Interface**: Designed with an intuitive interface that includes dynamic lists and navigation. The user experience is enhanced with real-time updates and easy-to-use filtering options.
 - **Dark Mode**: Supports a sleek dark mode, offering a visually comfortable experience in low-light environments. Users can easily switch between light and dark themes based on their preference.
-- * Notifications**: Keeps the user ahead of the deadlines with notifications. Automatically receive reminders 1 hour and 1 day before each task's due date.
+- **Notifications**: Keeps the user ahead of the deadlines with notifications. Automatically receive reminders 1 hour and 1 day before each task's due date.
 
 
 ## Demonstration Video
