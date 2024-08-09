@@ -2,6 +2,12 @@
 
 **NeatNote** is a user-friendly iOS task management app designed to help you organize, prioritize, and manage your tasks efficiently. Developed using **SwiftUI** and **CoreData**, NeatNote offers a seamless and intuitive experience for keeping track of your daily activities and deadlines.
 
+## Demonstration Video
+
+Check out the demonstration video of the NeatNote app:
+
+<a href="https://drive.google.com/file/d/19bEm2ulWtv3mMSEinu51vj2jtsqQRVYi/view?usp=sharing" target="_blank">Watch the demo video</a>
+
 ## Key Features
 
 - **Task Management**: Easily create, view, edit, and delete tasks. Manage your tasks with customizable categories and priorities to keep everything organized and prioritized.
@@ -11,14 +17,6 @@
 - **User-Friendly Interface**: Designed with an intuitive interface that includes dynamic lists and navigation. The user experience is enhanced with real-time updates and easy-to-use filtering options.
 - **Dark Mode**: Supports a sleek dark mode, offering a visually comfortable experience in low-light environments. Users can easily switch between light and dark themes based on their preference.
 - **Notifications**: Keeps the user ahead of the deadlines with notifications. Automatically receive reminders 1 hour and 1 day before each task's due date.
-
-
-## Demonstration Video
-
-Check out the demonstration video of the NeatNote app:
-
-<a href="https://drive.google.com/file/d/19bEm2ulWtv3mMSEinu51vj2jtsqQRVYi/view?usp=sharing" target="_blank">Watch the demo video</a>
-
 
 ## How It Works
 
