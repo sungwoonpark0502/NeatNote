@@ -17,7 +17,9 @@
 
 Check out the demonstration video of the NeatNote app:
 
-In Progress
+<p align="center">
+<img src="" width="300" height="500">
+</p>
 
 ## How It Works
 
