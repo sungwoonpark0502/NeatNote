@@ -17,9 +17,8 @@
 
 Check out the demonstration video of the NeatNote app:
 
-<p align="center">
-[Watch the Demonstration Video](https://drive.google.com/file/d/19bEm2ulWtv3mMSEinu51vj2jtsqQRVYi/view?usp=sharing)
-</p>
+<a href="https://drive.google.com/file/d/19bEm2ulWtv3mMSEinu51vj2jtsqQRVYi/view?usp=sharing" target="_blank">Watch the demo video</a>
+
 
 ## How It Works
 
